@@ -47,21 +47,23 @@ android {
 }
 
 dependencies {
+    implementation(Dependencies.Android.coreKtx)
+    implementation(platform(Dependencies.Android.kotlinBom))
+    implementation(Dependencies.Android.lifecycleRuntimeKtx)
 
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2023.05.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(Dependencies.Compose.activityCompose)
+    implementation(platform(Dependencies.Compose.composeBom))
+    implementation(Dependencies.Compose.composeUi)
+    implementation(Dependencies.Compose.composeUiGraphics)
+    implementation(Dependencies.Compose.composeUiToolingPreview)
+    implementation(Dependencies.Compose.composeMaterial)
+
+    testImplementation(Dependencies.Test.junit)
+    androidTestImplementation(Dependencies.Test.testExtJunit)
+    androidTestImplementation(Dependencies.Test.testEspresso)
+
+    androidTestImplementation(platform(Dependencies.Compose.composeBom))
+    androidTestImplementation(Dependencies.Compose.composeUiTestJUnit)
+    debugImplementation(Dependencies.Compose.composeUiTooling)
+    debugImplementation(Dependencies.Compose.composeUiTestManifest)
 }
