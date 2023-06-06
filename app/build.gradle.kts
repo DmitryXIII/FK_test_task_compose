@@ -58,6 +58,10 @@ dependencies {
     implementation(Dependencies.Compose.composeUiToolingPreview)
     implementation(Dependencies.Compose.composeMaterial)
 
+    implementation(Dependencies.Retrofit.RETROFIT_2)
+    implementation(Dependencies.Retrofit.RETROFIT_2_CONVERTER_GSON)
+    implementation(Dependencies.Retrofit.LOGGING_INTERCEPTOR)
+
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.testExtJunit)
     androidTestImplementation(Dependencies.Test.testEspresso)

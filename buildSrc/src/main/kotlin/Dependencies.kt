@@ -34,4 +34,16 @@ object Dependencies {
         const val testExtJunit = "androidx.test.ext:junit:$testExtJunitVersion"
         const val testEspresso = "androidx.test.espresso:espresso-core:$testEspressoVersion"
     }
+
+    object Retrofit {
+        private const val RETROFIT_2_VER = "2.9.0"
+        private const val RETROFIT_2_CONVERTER_GSON_VER = "2.9.0"
+        private const val LOGGING_INTERCEPTOR_VER = "4.9.3"
+
+        const val RETROFIT_2 = "com.squareup.retrofit2:retrofit:$RETROFIT_2_VER"
+        const val RETROFIT_2_CONVERTER_GSON =
+            "com.squareup.retrofit2:converter-gson:$RETROFIT_2_CONVERTER_GSON_VER"
+        const val LOGGING_INTERCEPTOR =
+            "com.squareup.okhttp3:logging-interceptor:$LOGGING_INTERCEPTOR_VER"
+    }
 }
