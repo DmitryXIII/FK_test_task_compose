@@ -31,6 +31,7 @@ import ru.avacodo.fktesttaskcompose.domain.model.FitLesson
 @Preview
 @Composable
 fun FitScheduleItem(
+    modifier: Modifier = Modifier,
     lesson: FitLesson = FitLesson(
         name = "Персональная тренировка",
         date = "среда, 11 января",
@@ -43,9 +44,8 @@ fun FitScheduleItem(
         markerColor = "#FF0000"
     )
 ) {
-
-
     Card(
+        modifier = modifier,
         elevation = CardDefaults.cardElevation(2.dp),
         shape = MaterialTheme.shapes.small
     ) {
