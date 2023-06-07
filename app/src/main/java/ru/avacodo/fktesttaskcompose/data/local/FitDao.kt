@@ -1,10 +1,12 @@
 package ru.avacodo.fktesttaskcompose.data.local
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ru.avacodo.fktesttaskcompose.data.local.entity.FitLessonEntity
 
+@Dao
 interface FitDao {
 
     @Query("SELECT * FROM FitLessonEntity")

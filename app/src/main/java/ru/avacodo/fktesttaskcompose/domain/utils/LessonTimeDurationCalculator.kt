@@ -5,6 +5,7 @@ import java.util.Locale
 
 private const val TIME_PATTERN = "HH:mm"
 private const val TIME_PARSE_ERROR = "Time parse error"
+private const val TIME_DURATION_ERROR = "Time duration error"
 private const val ONE_MINUTE_IN_MILLIS = 60_000
 private const val ONE_HOUR_IN_MILLIS = 3_600_000
 private const val HOUR_POSTFIX = " ч."
@@ -16,6 +17,8 @@ class LessonTimeDurationCalculator : TimeDurationCalc {
         val sdf = SimpleDateFormat(TIME_PATTERN, Locale.getDefault())
         val startTimeInMillis = sdf.parse(startTime)?.time ?: error(TIME_PARSE_ERROR)
         val endTimeInMillis = sdf.parse(endTime)?.time ?: error(TIME_PARSE_ERROR)
+
+        if (endTimeInMillis < startTimeInMillis) error(TIME_DURATION_ERROR)
 
         val durationMillis = endTimeInMillis - startTimeInMillis
 
