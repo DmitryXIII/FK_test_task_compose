@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -48,6 +49,10 @@ android {
 }
 
 dependencies {
+    implementation (Dependencies.Hilt.HILT_ANDROID)
+    kapt (Dependencies.Hilt.HILT_COMPILER)
+    implementation (Dependencies.Hilt.HILT_NAVIGATION_COMPOSE)
+
     implementation(Dependencies.Android.coreKtx)
     implementation(platform(Dependencies.Android.kotlinBom))
     implementation(Dependencies.Android.lifecycleRuntimeKtx)

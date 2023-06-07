@@ -54,4 +54,14 @@ object Dependencies {
         const val ROOM_COMPILER = "androidx.room:room-compiler:$ROOM_VER"
         const val ROOM_KTX = "androidx.room:room-ktx:$ROOM_VER"
     }
+
+    object Hilt {
+        private const val HILT_VER = "2.46.1"
+        private const val HILT_NAV_COMPOSE_VER = "1.0.0"
+
+        const val HILT_ANDROID = "com.google.dagger:hilt-android:$HILT_VER"
+        const val HILT_COMPILER = "com.google.dagger:hilt-compiler:$HILT_VER"
+        const val HILT_NAVIGATION_COMPOSE =
+            "androidx.hilt:hilt-navigation-compose:$HILT_NAV_COMPOSE_VER"
+    }
 }
