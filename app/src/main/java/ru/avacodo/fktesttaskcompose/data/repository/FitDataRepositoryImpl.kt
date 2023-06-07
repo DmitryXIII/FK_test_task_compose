@@ -16,6 +16,8 @@ class FitDataRepositoryImpl(
     }
 
     override suspend fun getFitRemoteData(): List<FitLesson> {
-        TODO("Not yet implemented")
+        return localDataSource.getFromCash().map {
+            dataMapper.mapEntityToLesson(it)
+        }
     }
 }

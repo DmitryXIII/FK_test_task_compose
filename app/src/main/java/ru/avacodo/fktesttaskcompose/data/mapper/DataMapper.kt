@@ -1,6 +1,7 @@
 package ru.avacodo.fktesttaskcompose.data.mapper
 
 import ru.avacodo.fktesttaskcompose.data.dto.FitDataDto
+import ru.avacodo.fktesttaskcompose.data.local.entity.FitLessonEntity
 import ru.avacodo.fktesttaskcompose.domain.model.FitLesson
 import ru.avacodo.fktesttaskcompose.domain.utils.TimeDurationCalc
 import java.text.SimpleDateFormat
@@ -34,6 +35,48 @@ class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
                     markerColor = color
                 )
             }
+        }
+    }
+
+    override fun mapToLessonEntityList(data: FitDataDto): List<FitLessonEntity> {
+        return data.lessons.map { lesson ->
+            with(lesson) {
+                FitLessonEntity(
+                    appointmentID = appointment_id,
+                    availableSlots = available_slots,
+                    clientRecorded = client_recorded,
+                    coachName = data.trainers.find { it.id == coach_id }?.full_name
+                        ?: DEFAULT_COACH_NAME,
+                    color = color,
+                    commercial = commercial,
+                    date = date,
+                    description = description,
+                    endTime = endTime,
+                    isCancelled = is_cancelled,
+                    name = name,
+                    place = place,
+                    serviceID = service_id,
+                    startTime = startTime,
+                    tab = tab,
+                    tabID = tab_id
+                )
+            }
+        }
+    }
+
+    override fun mapEntityToLesson(lessonEntity: FitLessonEntity): FitLesson {
+        return with(lessonEntity) {
+            FitLesson(
+                name = name,
+                date = dateFormatter.parse(date) ?: error(DATE_PARSE_ERROR),
+                tab = tab,
+                startTime = timeFormatter.parse(startTime) ?: error(TIME_PARSE_ERROR),
+                endTime = timeFormatter.parse(endTime) ?: error(TIME_PARSE_ERROR),
+                duration = durationCalc.calcTimeDuration(startTime, endTime),
+                coachName = coachName,
+                place = place,
+                markerColor = color
+            )
         }
     }
 }

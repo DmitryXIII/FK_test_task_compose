@@ -46,4 +46,12 @@ object Dependencies {
         const val LOGGING_INTERCEPTOR =
             "com.squareup.okhttp3:logging-interceptor:$LOGGING_INTERCEPTOR_VER"
     }
+
+    object Room {
+        private const val ROOM_VER = "2.4.3"
+
+        const val ROOM_RUNTIME = "androidx.room:room-runtime:$ROOM_VER"
+        const val ROOM_COMPILER = "androidx.room:room-compiler:$ROOM_VER"
+        const val ROOM_KTX = "androidx.room:room-ktx:$ROOM_VER"
+    }
 }

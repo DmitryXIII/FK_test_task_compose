@@ -3,6 +3,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -61,6 +62,10 @@ dependencies {
     implementation(Dependencies.Retrofit.RETROFIT_2)
     implementation(Dependencies.Retrofit.RETROFIT_2_CONVERTER_GSON)
     implementation(Dependencies.Retrofit.LOGGING_INTERCEPTOR)
+
+    implementation(Dependencies.Room.ROOM_RUNTIME)
+    kapt( Dependencies.Room.ROOM_COMPILER)
+    implementation(Dependencies.Room.ROOM_KTX)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.testExtJunit)
