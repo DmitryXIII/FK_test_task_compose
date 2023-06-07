@@ -9,7 +9,12 @@ class GetFitDataUsecaseImpl(
     private val dateListListGenerator: DateListGenerator
 ) : GetFitDataUsecase {
     override suspend fun getFitData(isDataFromCashRequired: Boolean): List<FitData> {
-        val lessons = repository.getRemoteFitData()
+        val lessons = if (!isDataFromCashRequired) {
+            repository.getRemoteFitData()
+        } else {
+            repository.getLocalFitData()
+        }
+
         val dates = dateListListGenerator.generateDateList(lessons)
         return mutableListOf<FitData>().apply {
             dates.forEach { fitDate ->
@@ -18,8 +23,8 @@ class GetFitDataUsecaseImpl(
                     .filter { it.date == fitDate.date }
                     .sortedBy { it.startTime }
                     .forEach { lesson ->
-                    add(lesson)
-                }
+                        add(lesson)
+                    }
             }
         }
     }

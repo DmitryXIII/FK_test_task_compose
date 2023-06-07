@@ -7,12 +7,7 @@ import ru.avacodo.fktesttaskcompose.data.local.entity.FitLessonEntity
 import ru.avacodo.fktesttaskcompose.data.mapper.FitDataMapper
 import ru.avacodo.fktesttaskcompose.domain.model.FitLesson
 import ru.avacodo.fktesttaskcompose.domain.utils.LessonTimeDurationCalculator
-import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class DataMapperTest {
