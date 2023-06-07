@@ -38,29 +38,19 @@ class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
         }
     }
 
-    override fun mapToLessonEntityList(data: FitDataDto): List<FitLessonEntity> {
-        return data.lessons.map { lesson ->
-            with(lesson) {
-                FitLessonEntity(
-                    appointmentID = appointment_id,
-                    availableSlots = available_slots,
-                    clientRecorded = client_recorded,
-                    coachName = data.trainers.find { it.id == coach_id }?.full_name
-                        ?: DEFAULT_COACH_NAME,
-                    color = color,
-                    commercial = commercial,
-                    date = date,
-                    description = description,
-                    endTime = endTime,
-                    isCancelled = is_cancelled,
-                    name = name,
-                    place = place,
-                    serviceID = service_id,
-                    startTime = startTime,
-                    tab = tab,
-                    tabID = tab_id
-                )
-            }
+    override fun mapToLessonEntity(lesson: FitLesson): FitLessonEntity {
+        return with(lesson) {
+            FitLessonEntity(
+                name = name,
+                date = dateFormatter.format(date),
+                tab = tab,
+                startTime = timeFormatter.format(startTime),
+                endTime = timeFormatter.format(endTime),
+                duration = duration,
+                coachName = coachName,
+                place = place,
+                markerColor = markerColor
+            )
         }
     }
 
@@ -75,7 +65,7 @@ class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
                 duration = durationCalc.calcTimeDuration(startTime, endTime),
                 coachName = coachName,
                 place = place,
-                markerColor = color
+                markerColor = markerColor
             )
         }
     }

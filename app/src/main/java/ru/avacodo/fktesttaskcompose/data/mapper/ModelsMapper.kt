@@ -7,5 +7,5 @@ import ru.avacodo.fktesttaskcompose.domain.model.FitLesson
 interface ModelsMapper {
     fun mapToLessonList(data: FitDataDto): List<FitLesson>
     fun mapEntityToLesson(lessonEntity: FitLessonEntity): FitLesson
-    fun mapToLessonEntityList(data: FitDataDto): List<FitLessonEntity>
+    fun mapToLessonEntity(lesson: FitLesson): FitLessonEntity
 }

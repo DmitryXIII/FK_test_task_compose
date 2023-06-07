@@ -8,8 +8,8 @@ class GetFitDataUsecaseImpl(
     private val repository: FitDataRepository,
     private val dateListListGenerator: DateListGenerator
 ) : GetFitDataUsecase {
-    override suspend fun getFitData(): List<FitData> {
-        val lessons = repository.getFitRemoteData()
+    override suspend fun getFitData(isDataFromCashRequired: Boolean): List<FitData> {
+        val lessons = repository.getRemoteFitData()
         val dates = dateListListGenerator.generateDateList(lessons)
         return mutableListOf<FitData>().apply {
             dates.forEach { fitDate ->

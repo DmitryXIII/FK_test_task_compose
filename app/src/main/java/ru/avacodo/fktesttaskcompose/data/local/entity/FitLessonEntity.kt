@@ -7,20 +7,13 @@ import androidx.room.PrimaryKey
 data class FitLessonEntity(
     @PrimaryKey(autoGenerate = true)
     val ID: Int = 0,
-    val appointmentID: String,
-    val availableSlots: Int,
-    val clientRecorded: Boolean,
-    val coachName: String,
-    val color: String,
-    val commercial: Boolean,
-    val date: String,
-    val description: String,
-    val endTime: String,
-    val isCancelled: Boolean,
     val name: String,
-    val place: String,
-    val serviceID: String,
-    val startTime: String,
+    val date: String,
     val tab: String,
-    val tabID: Int
+    val startTime: String,
+    val endTime: String,
+    val duration: String,
+    val coachName: String,
+    val place: String,
+    val markerColor: String
 )
