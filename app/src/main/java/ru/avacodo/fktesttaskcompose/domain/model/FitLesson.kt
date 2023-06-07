@@ -1,13 +1,11 @@
 package ru.avacodo.fktesttaskcompose.domain.model
 
-import java.util.Date
-
 data class FitLesson(
 val name: String,
-val date: Date,
+val date: String,
 val tab: String,
-val startTime: Date,
-val endTime: Date,
+val startTime: String,
+val endTime: String,
 val duration: String,
 val coachName: String,
 val place: String,

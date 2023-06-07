@@ -9,25 +9,28 @@ import java.util.Locale
 
 private const val DEFAULT_TAB_NAME = "undefined tab name"
 private const val DEFAULT_COACH_NAME = "undefined coach name"
-private const val DATE_PATTERN = "yyyy-MM-dd"
-private const val TIME_PATTERN = "HH:mm"
+private const val INCOME_DATE_PATTERN = "yyyy-MM-dd"
+private const val OUTCOME_DATE_PATTERN = "EEEE, dd MMMM"
 private const val DATE_PARSE_ERROR = "date parse error"
-private const val TIME_PARSE_ERROR = "time parse error"
 
 class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
-    private val dateFormatter = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
-    private val timeFormatter = SimpleDateFormat(TIME_PATTERN, Locale.getDefault())
+    private val incomeDateFormatter = SimpleDateFormat(INCOME_DATE_PATTERN, Locale.getDefault())
+    private val outcomeDateFormatter = SimpleDateFormat(OUTCOME_DATE_PATTERN, Locale.getDefault())
 
     override fun mapToLessonList(data: FitDataDto): List<FitLesson> {
         return data.lessons.map { lesson ->
             with(lesson) {
                 FitLesson(
                     name = name,
-                    date = dateFormatter.parse(date) ?: error(DATE_PARSE_ERROR),
+                    date = outcomeDateFormatter.format(
+                        incomeDateFormatter.parse(date) ?: error(
+                            DATE_PARSE_ERROR
+                        )
+                    ),
                     tab = data.tabs.find { it.id == tab_id }?.name
                         ?: DEFAULT_TAB_NAME,
-                    startTime = timeFormatter.parse(startTime) ?: error(TIME_PARSE_ERROR),
-                    endTime = timeFormatter.parse(endTime) ?: error(TIME_PARSE_ERROR),
+                    startTime = startTime,
+                    endTime = endTime,
                     duration = durationCalc.calcTimeDuration(startTime, endTime),
                     coachName = data.trainers.find { it.id == coach_id }?.full_name
                         ?: DEFAULT_COACH_NAME,
@@ -42,10 +45,10 @@ class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
         return with(lesson) {
             FitLessonEntity(
                 name = name,
-                date = dateFormatter.format(date),
+                date = date,
                 tab = tab,
-                startTime = timeFormatter.format(startTime),
-                endTime = timeFormatter.format(endTime),
+                startTime = startTime,
+                endTime = endTime,
                 duration = duration,
                 coachName = coachName,
                 place = place,
@@ -58,11 +61,11 @@ class FitDataMapper(private val durationCalc: TimeDurationCalc) : ModelsMapper {
         return with(lessonEntity) {
             FitLesson(
                 name = name,
-                date = dateFormatter.parse(date) ?: error(DATE_PARSE_ERROR),
+                date = date,
                 tab = tab,
-                startTime = timeFormatter.parse(startTime) ?: error(TIME_PARSE_ERROR),
-                endTime = timeFormatter.parse(endTime) ?: error(TIME_PARSE_ERROR),
-                duration = durationCalc.calcTimeDuration(startTime, endTime),
+                startTime = startTime,
+                endTime = endTime,
+                duration = duration,
                 coachName = coachName,
                 place = place,
                 markerColor = markerColor
