@@ -1,7 +1,7 @@
 package ru.avacodo.fktesttaskcompose.ui.screens.schedule
 
-import android.util.Log
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,12 +15,15 @@ import javax.inject.Inject
 class FitScheduleViewModel @Inject constructor(
     private val usecase: GetFitDataUsecase
 ) : ViewModel() {
-    val uiState = mutableStateOf(FitScheduleScreenState())
+    private val _uiState = MutableLiveData(FitScheduleScreenState())
+    val uiState: LiveData<FitScheduleScreenState> = _uiState
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        uiState.value = uiState.value.copy(
-            isError = true,
-            errorMessage = throwable.message.toString()
+        _uiState.postValue(
+            _uiState.value?.copy(
+                isError = true,
+                errorMessage = throwable.message.toString()
+            )
         )
     }
 
@@ -28,42 +31,22 @@ class FitScheduleViewModel @Inject constructor(
         execute()
     }
 
-    fun execute() {
-        viewModelScope.launch(Dispatchers.IO ) {
-            Log.d("@#@", "execute before: +++++++++++++++++++++++")
-            val result = usecase.getFitData(false)
-            Log.d("@#@", "execute: +++++++++++++++++++++++")
-            Log.d("@#@", "${result}")
-            Log.d("@#@", "${uiState.value}")
-            uiState.value = uiState.value.copy(
+    private fun execute() {
+        _uiState.postValue(
+            _uiState.value?.copy(
                 isError = false,
-                errorMessage = "",
-                isLoading = false,
-                data = result
+                isLoading = true,
+            )
+        )
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _uiState.postValue(
+                _uiState.value?.copy(
+                    isError = false,
+                    errorMessage = "",
+                    isLoading = false,
+                    data = usecase.getFitData(false)
+                )
             )
         }
-//        when (event) {
-//            BaseAppEvent.Action -> {
-//                viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-//                    Log.d("@#@", "execute before: +++++++++++++++++++++++")
-//                    val result = usecase.getFitData(false)
-//                    Log.d("@#@", "execute: +++++++++++++++++++++++")
-//                    uiState.value = uiState.value.copy(
-//                        isError = false,
-//                        errorMessage = "",
-//                        isLoading = false,
-//                        data = result
-//                    )
-//                }
-//            }
-//
-//            BaseAppEvent.Loading -> {
-//                uiState.value = uiState.value.copy(
-//                    isError = false,
-//                    errorMessage = "",
-//                    isLoading = true,
-//                )
-//            }
-//        }
     }
 }

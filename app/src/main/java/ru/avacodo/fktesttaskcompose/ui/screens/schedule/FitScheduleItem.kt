@@ -52,12 +52,12 @@ fun FitScheduleItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp),
+                .height(80.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(
                 modifier = Modifier
-                    .height(50.dp)
+                    .height(80.dp)
                     .width(6.dp)
                     .background(Color(android.graphics.Color.parseColor(lesson.markerColor)))
             )
