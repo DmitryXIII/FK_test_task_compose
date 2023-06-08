@@ -31,19 +31,31 @@ class FitScheduleViewModel @Inject constructor(
         execute()
     }
 
-    private fun execute() {
-        _uiState.postValue(
-            _uiState.value?.copy(
-                isError = false,
-                isLoading = true,
+    fun execute(isRefreshing: Boolean = false) {
+        if (!isRefreshing) {
+            _uiState.postValue(
+                _uiState.value?.copy(
+                    isError = false,
+                    isLoading = true,
+                )
             )
-        )
+        } else {
+            _uiState.postValue(
+                _uiState.value?.copy(
+                    isError = false,
+                    isLoading = false,
+                    isRefreshing = true
+                )
+            )
+        }
+
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _uiState.postValue(
                 _uiState.value?.copy(
                     isError = false,
                     errorMessage = "",
                     isLoading = false,
+                    isRefreshing = false,
                     data = usecase.getFitData(false)
                 )
             )

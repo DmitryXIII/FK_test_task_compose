@@ -15,6 +15,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -36,13 +38,20 @@ fun FitScheduleScreen() {
                 }
             } else if (uiState.isLoading) {
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(innerPadding),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
                 }
             } else {
-                FitScheduleList(lessonsList = uiState.data)
+                SwipeRefresh(
+                    state = rememberSwipeRefreshState(uiState.isRefreshing),
+                    onRefresh = { viewModel.execute(true) },
+                ) {
+                    FitScheduleList(lessonsList = uiState.data)
+                }
             }
         }
     )

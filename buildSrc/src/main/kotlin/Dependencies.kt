@@ -3,16 +3,19 @@ object Dependencies {
         private const val coreKtxVersion = "1.10.1"
         private const val lifecycleRuntimeKtxVersion = "2.6.1"
         private const val kotlinBomVersion = "1.8.0-RC2"
+        private const val swipeRefreshVersion = "0.31.3-beta"
 
         const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
         const val lifecycleRuntimeKtx =
             "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion"
         const val kotlinBom = "org.jetbrains.kotlin:kotlin-bom:$kotlinBomVersion"
+        const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:$swipeRefreshVersion"
     }
 
     object Compose {
         private const val activityComposeVersion = "1.7.2"
         private const val composeBomVersion = "2023.05.01"
+        private const val composeLiveDataVersion = "1.5.0-beta02"
 
         const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
         const val composeBom = "androidx.compose:compose-bom:$composeBomVersion"
@@ -23,6 +26,7 @@ object Dependencies {
         const val composeUiTestJUnit = "androidx.compose.ui:ui-test-junit4"
         const val composeUiTooling = "androidx.compose.ui:ui-tooling"
         const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest"
+        const val composeLiveData = "androidx.compose.runtime:runtime-livedata:$composeLiveDataVersion"
     }
 
     object Test {
@@ -39,12 +43,15 @@ object Dependencies {
         private const val RETROFIT_2_VER = "2.9.0"
         private const val RETROFIT_2_CONVERTER_GSON_VER = "2.9.0"
         private const val LOGGING_INTERCEPTOR_VER = "4.9.3"
+        private const val COROUTINE_ADAPTER_VER = "0.9.2"
 
         const val RETROFIT_2 = "com.squareup.retrofit2:retrofit:$RETROFIT_2_VER"
         const val RETROFIT_2_CONVERTER_GSON =
             "com.squareup.retrofit2:converter-gson:$RETROFIT_2_CONVERTER_GSON_VER"
         const val LOGGING_INTERCEPTOR =
             "com.squareup.okhttp3:logging-interceptor:$LOGGING_INTERCEPTOR_VER"
+        const val COROUTINE_ADAPTER =
+            "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$COROUTINE_ADAPTER_VER"
     }
 
     object Room {
