@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun FitScheduleScreen() {
     val viewModel: FitScheduleViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.observeAsState(initial = FitScheduleScreenState()).value
+    val uiState = viewModel.uiState.observeAsState(initial = FitScheduleScreenState.Initial()).value
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -30,27 +30,31 @@ fun FitScheduleScreen() {
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { innerPadding ->
-            if (uiState.isError) {
-                LaunchedEffect(key1 = uiState) {
-                    scope.launch {
-                        snackbarHostState.showSnackbar(uiState.errorMessage)
+            when (uiState) {
+                is FitScheduleScreenState.Error -> {
+                    LaunchedEffect(key1 = uiState) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(uiState.errorMessage)
+                        }
                     }
                 }
-            } else if (uiState.isLoading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
+                is FitScheduleScreenState.Loading -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 }
-            } else {
-                SwipeRefresh(
-                    state = rememberSwipeRefreshState(uiState.isRefreshing),
-                    onRefresh = { viewModel.execute(true) },
-                ) {
-                    FitScheduleList(lessonsList = uiState.data)
+                else -> {
+                    SwipeRefresh(
+                        state = rememberSwipeRefreshState(uiState.isRefreshing),
+                        onRefresh = { viewModel.execute(true) },
+                    ) {
+                        FitScheduleList(lessonsList = uiState.data)
+                    }
                 }
             }
         }

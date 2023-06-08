@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.avacodo.fktesttaskcompose.domain.model.FitData
 import ru.avacodo.fktesttaskcompose.domain.usecase.GetFitDataUsecase
 import javax.inject.Inject
 
@@ -15,13 +16,12 @@ import javax.inject.Inject
 class FitScheduleViewModel @Inject constructor(
     private val usecase: GetFitDataUsecase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData(FitScheduleScreenState())
-    val uiState: LiveData<FitScheduleScreenState> = _uiState
+    private val _uiState = MutableLiveData<FitScheduleScreenState<FitData>>()
+    val uiState: LiveData<FitScheduleScreenState<FitData>> = _uiState
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _uiState.postValue(
-            _uiState.value?.copy(
-                isError = true,
+            FitScheduleScreenState.Error(
                 errorMessage = throwable.message.toString()
             )
         )
@@ -33,29 +33,14 @@ class FitScheduleViewModel @Inject constructor(
 
     fun execute(isRefreshing: Boolean = false) {
         if (!isRefreshing) {
-            _uiState.postValue(
-                _uiState.value?.copy(
-                    isError = false,
-                    isLoading = true,
-                )
-            )
+            _uiState.postValue(FitScheduleScreenState.Loading())
         } else {
-            _uiState.postValue(
-                _uiState.value?.copy(
-                    isError = false,
-                    isLoading = false,
-                    isRefreshing = true
-                )
-            )
+            _uiState.postValue(FitScheduleScreenState.Refreshing())
         }
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _uiState.postValue(
-                _uiState.value?.copy(
-                    isError = false,
-                    errorMessage = "",
-                    isLoading = false,
-                    isRefreshing = false,
+                FitScheduleScreenState.Success(
                     data = usecase.getFitData(false)
                 )
             )
