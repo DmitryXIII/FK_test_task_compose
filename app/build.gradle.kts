@@ -42,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.7"
@@ -67,6 +68,7 @@ dependencies {
     implementation(Dependencies.Retrofit.RETROFIT_2)
     implementation(Dependencies.Retrofit.RETROFIT_2_CONVERTER_GSON)
     implementation(Dependencies.Retrofit.LOGGING_INTERCEPTOR)
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
     implementation(Dependencies.Room.ROOM_RUNTIME)
     kapt( Dependencies.Room.ROOM_COMPILER)

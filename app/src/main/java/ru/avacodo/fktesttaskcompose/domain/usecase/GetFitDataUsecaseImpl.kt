@@ -6,13 +6,13 @@ import ru.avacodo.fktesttaskcompose.domain.utils.DateListGenerator
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-private const val OUTCOME_DATE_PATTERN = "EEEE, dd MMMM"
+private const val TIME_FORMAT_PATTERN = "HH:mm"
 
 class GetFitDataUsecaseImpl(
     private val repository: FitDataRepository,
     private val dateListListGenerator: DateListGenerator
 ) : GetFitDataUsecase {
-    private val outcomeDateFormatter = SimpleDateFormat(OUTCOME_DATE_PATTERN, Locale.getDefault())
+    private val outcomeDateFormatter = SimpleDateFormat(TIME_FORMAT_PATTERN, Locale.getDefault())
     override suspend fun getFitData(isDataFromCashRequired: Boolean): List<FitData> {
         val lessons = if (!isDataFromCashRequired) {
             repository.getRemoteFitData()

@@ -13,40 +13,40 @@ import ru.avacodo.fktesttaskcompose.domain.model.FitLessonDate
 
 @Preview
 @Composable
-fun FitScheduleList() {
-    val list = mutableListOf<FitData>()
-
-    repeat(10) {
-        if (it % 4 == 0) {
-            list.add(
-                FitLessonDate(
-                    date = "среда, ${it + 1} июня"
+fun FitScheduleList(
+    lessonsList: List<FitData> = mutableListOf<FitData>().apply {
+        repeat(10) {
+            if (it % 4 == 0) {
+                add(
+                    FitLessonDate(
+                        date = "среда, ${it + 1} июня"
+                    )
                 )
-            )
-        } else {
-            list.add(
-                FitLesson(
-                    name = "Персональная тренировка",
-                    date = "среда, 11 января",
-                    tab = "mea",
-                    startTime = "16:45",
-                    endTime = "17:45",
-                    duration = "1 ч. 00 мин.",
-                    coachName = "Мишенин Даниил",
-                    place = "Тренажерный зал",
-                    markerColor = "#FF0000"
+            } else {
+                add(
+                    FitLesson(
+                        name = "Персональная тренировка",
+                        date = "среда, 11 января",
+                        tab = "mea",
+                        startTime = "16:45",
+                        endTime = "17:45",
+                        duration = "1 ч. 00 мин.",
+                        coachName = "Мишенин Даниил",
+                        place = "Тренажерный зал",
+                        markerColor = "#FF0000"
+                    )
                 )
-            )
+            }
         }
     }
-
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 12.dp, end = 12.dp)
     ) {
-        items(list.size) {
-            when (val item = list[it]) {
+        items(lessonsList.size) {
+            when (val item = lessonsList[it]) {
                 is FitLessonDate -> {
                     FitScheduleDateItem(item.date)
                 }
@@ -55,7 +55,7 @@ fun FitScheduleList() {
                     FitScheduleItem(
                         modifier = Modifier.padding(
                             top = 12.dp,
-                            bottom = if (it != list.lastIndex) {
+                            bottom = if (it != lessonsList.lastIndex) {
                                 0.dp
                             } else {
                                 12.dp

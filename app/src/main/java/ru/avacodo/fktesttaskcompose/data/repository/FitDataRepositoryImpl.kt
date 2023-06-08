@@ -12,18 +12,19 @@ class FitDataRepositoryImpl(
     private val dataMapper: ModelsMapper
 ) : FitDataRepository {
     override suspend fun getLocalFitData(): List<FitLesson> {
-        val remoteData = dataMapper.mapToLessonList(remoteDataSource.getFitData())
+        return localDataSource.getFromCash().map {
+            dataMapper.mapEntityToLesson(it)
+        }
+    }
+
+
+    override suspend fun getRemoteFitData(): List<FitLesson> {
+        val remoteData = dataMapper.mapToLessonList(remoteDataSource.getFitDataAsync().await())
         return remoteData.also {
             localDataSource.let {
                 clearCash()
                 addToCash(remoteData)
             }
-        }
-    }
-
-    override suspend fun getRemoteFitData(): List<FitLesson> {
-        return localDataSource.getFromCash().map {
-            dataMapper.mapEntityToLesson(it)
         }
     }
 
