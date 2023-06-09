@@ -35,7 +35,10 @@ class FitScheduleViewModel @Inject constructor(
         if (!isRefreshing) {
             _uiState.postValue(FitScheduleScreenState.Loading())
         } else {
-            _uiState.postValue(FitScheduleScreenState.Refreshing())
+            _uiState.postValue(
+                FitScheduleScreenState.Refreshing<FitData>()
+                    .copy(data = _uiState.value?.data ?: listOf())
+            )
         }
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {

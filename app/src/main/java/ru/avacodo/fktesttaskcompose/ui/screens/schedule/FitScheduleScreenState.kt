@@ -1,7 +1,5 @@
 package ru.avacodo.fktesttaskcompose.ui.screens.schedule
 
-import ru.avacodo.fktesttaskcompose.domain.model.FitData
-
 sealed class FitScheduleScreenState<T> {
     abstract val isLoading: Boolean
     abstract val isRefreshing: Boolean
