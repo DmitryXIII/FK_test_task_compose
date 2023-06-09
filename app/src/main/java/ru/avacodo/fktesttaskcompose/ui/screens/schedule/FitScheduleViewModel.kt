@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import ru.avacodo.fktesttaskcompose.domain.model.FitData
 import ru.avacodo.fktesttaskcompose.domain.usecase.GetFitDataUsecase
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class FitScheduleViewModel @Inject constructor(
@@ -47,6 +48,7 @@ class FitScheduleViewModel @Inject constructor(
                     data = usecase.getFitData(false)
                 )
             )
+            if (Random.nextBoolean()) error("Test error")
         }
     }
 }
