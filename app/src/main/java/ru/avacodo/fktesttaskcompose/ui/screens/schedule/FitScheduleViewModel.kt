@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.avacodo.fktesttaskcompose.domain.model.FitData
 import ru.avacodo.fktesttaskcompose.domain.usecase.GetFitDataUsecase
@@ -43,12 +44,16 @@ class FitScheduleViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            _uiState.postValue(
-                FitScheduleScreenState.Success(
-                    data = usecase.getFitData(false)
+            if (Random.nextBoolean()) {
+                delay(2000)
+                error("Test error")
+            } else {
+                _uiState.postValue(
+                    FitScheduleScreenState.Success(
+                        data = usecase.getFitData(false)
+                    )
                 )
-            )
-            if (Random.nextBoolean()) error("Test error")
+            }
         }
     }
 }
