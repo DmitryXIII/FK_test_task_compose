@@ -66,12 +66,13 @@ dependencies {
     implementation(Dependencies.Compose.composeUiToolingPreview)
     implementation(Dependencies.Compose.composeMaterial)
     implementation(Dependencies.Compose.composeLiveData)
+    implementation(Dependencies.Compose.composeNavigation)
+    implementation(Dependencies.Compose.composeNavigationAnimation)
 
     implementation(Dependencies.Retrofit.RETROFIT_2)
     implementation(Dependencies.Retrofit.RETROFIT_2_CONVERTER_GSON)
     implementation(Dependencies.Retrofit.LOGGING_INTERCEPTOR)
     implementation(Dependencies.Retrofit.COROUTINE_ADAPTER)
-
 
     implementation(Dependencies.Room.ROOM_RUNTIME)
     kapt( Dependencies.Room.ROOM_COMPILER)
