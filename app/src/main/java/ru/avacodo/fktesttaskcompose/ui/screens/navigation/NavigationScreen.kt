@@ -37,7 +37,7 @@ fun NavigationScreen() {
         content = { paddingValues ->
             when (selectedItem.value) {
                 0 -> {
-                    title = FKNavigationBarItems.SCHEDULE.title
+                    title = "Расписание"
                     FitScheduleScreen(
                         padding = paddingValues,
                         snackbarHostState = snackbarHostState
@@ -57,7 +57,7 @@ fun NavigationScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FKTopBar(title: String = "Title") {
-    Surface(shadowElevation = 2.dp) {
+    Surface(shadowElevation = 4.dp) {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFF6F6F6)),
             title = {

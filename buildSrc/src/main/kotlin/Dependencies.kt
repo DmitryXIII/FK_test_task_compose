@@ -15,7 +15,7 @@ object Dependencies {
     object Compose {
         private const val activityComposeVersion = "1.7.2"
         private const val composeBomVersion = "2023.05.01"
-        private const val composeLiveDataVersion = "1.5.0-beta02"
+        private const val composeLifeCycleVersion = "2.6.0-beta01"
         private const val composeNavigationVersion = "2.6.0"
         private const val composeNavigationAnimationVersion = "0.31.2-alpha"
 
@@ -28,7 +28,7 @@ object Dependencies {
         const val composeUiTestJUnit = "androidx.compose.ui:ui-test-junit4"
         const val composeUiTooling = "androidx.compose.ui:ui-tooling"
         const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest"
-        const val composeLiveData = "androidx.compose.runtime:runtime-livedata:$composeLiveDataVersion"
+        const val composeLifeCycle = "androidx.lifecycle:lifecycle-runtime-compose:$composeLifeCycleVersion"
         const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
         const val composeNavigationAnimation = "com.google.accompanist:accompanist-navigation-animation:$composeNavigationAnimationVersion"
     }
