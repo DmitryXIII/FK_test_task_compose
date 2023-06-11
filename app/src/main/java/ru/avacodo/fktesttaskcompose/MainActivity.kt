@@ -10,7 +10,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.avacodo.fktesttaskcompose.ui.screens.navigation.NavigationScreen
 import ru.avacodo.fktesttaskcompose.ui.screens.navigation.SetupNavHost
 import ru.avacodo.fktesttaskcompose.ui.theme.FKTestTaskcomposeTheme
 
