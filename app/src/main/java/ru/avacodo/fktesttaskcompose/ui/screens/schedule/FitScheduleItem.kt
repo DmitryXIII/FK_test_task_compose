@@ -2,6 +2,7 @@ package ru.avacodo.fktesttaskcompose.ui.screens.schedule
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -49,74 +50,79 @@ fun FitScheduleItem(
         elevation = CardDefaults.cardElevation(2.dp),
         shape = MaterialTheme.shapes.small
     ) {
-        Row(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .background(Color.White)
         ) {
-            Spacer(
+            Row(
                 modifier = Modifier
-                    .height(80.dp)
-                    .width(6.dp)
-                    .background(Color(android.graphics.Color.parseColor(lesson.markerColor)))
-            )
-            Column(
-                modifier = Modifier
-                    .padding(start = 12.dp)
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.SpaceEvenly
+                    .fillMaxWidth()
+                    .height(80.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                SecondaryText(text = lesson.startTime)
-                SecondaryText(text = lesson.endTime)
-            }
-            Column(
-                modifier = Modifier
-                    .padding(start = 12.dp)
-                    .weight(1f)
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Row(
-                    modifier = Modifier.padding(end = 12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    PrimaryText(modifier = Modifier.weight(1f), text = lesson.name)
-                    SecondaryText(text = lesson.duration)
-                }
-
-                Row(
+                Spacer(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(end = 12.dp)
+                        .height(80.dp)
+                        .width(6.dp)
+                        .background(Color(android.graphics.Color.parseColor(lesson.markerColor)))
+                )
+                Column(
+                    modifier = Modifier
+                        .padding(start = 12.dp)
+                        .fillMaxHeight(),
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    SecondaryText(text = lesson.startTime)
+                    SecondaryText(text = lesson.endTime)
+                }
+                Column(
+                    modifier = Modifier
+                        .padding(start = 12.dp)
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(0.6f)
+                        modifier = Modifier.padding(end = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            modifier = Modifier.width(16.dp),
-                            painter = painterResource(R.drawable.ic_coach),
-                            contentDescription = "coach_icon"
-                        )
-                        SecondaryText(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = lesson.coachName
-                        )
+                        PrimaryText(modifier = Modifier.weight(1f), text = lesson.name)
+                        SecondaryText(text = lesson.duration)
                     }
 
                     Row(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 12.dp)
                     ) {
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
-                            modifier = Modifier.width(16.dp),
-                            painter = painterResource(R.drawable.ic_location),
-                            contentDescription = "place_icon"
-                        )
-                        InfoText(
-                            modifier = Modifier.padding(start = 8.dp),
-                            text = lesson.place
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(0.6f)
+                        ) {
+                            Icon(
+                                modifier = Modifier.width(16.dp),
+                                painter = painterResource(R.drawable.ic_coach),
+                                contentDescription = "coach_icon"
+                            )
+                            SecondaryText(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = lesson.coachName
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Icon(
+                                modifier = Modifier.width(16.dp),
+                                painter = painterResource(R.drawable.ic_location),
+                                contentDescription = "place_icon"
+                            )
+                            InfoText(
+                                modifier = Modifier.padding(start = 8.dp),
+                                text = lesson.place
+                            )
+                        }
                     }
                 }
             }

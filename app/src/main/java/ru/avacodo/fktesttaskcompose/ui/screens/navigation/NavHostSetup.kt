@@ -18,8 +18,8 @@ import com.google.accompanist.navigation.animation.composable
 sealed class Screens {
     abstract fun name(): String
 
-    object Navigation : Screens() {
-        override fun name() = "Navigation_screen"
+    object Main : Screens() {
+        override fun name() = "Main_screen"
     }
 }
 
@@ -28,9 +28,9 @@ sealed class Screens {
 fun SetupNavHost(navController: NavHostController) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = Screens.Navigation.name()
+        startDestination = Screens.Main.name()
     ) {
-        routeToDestination(Screens.Navigation.name()) {
+        routeToDestination(Screens.Main.name()) {
             NavigationScreen()
         }
     }

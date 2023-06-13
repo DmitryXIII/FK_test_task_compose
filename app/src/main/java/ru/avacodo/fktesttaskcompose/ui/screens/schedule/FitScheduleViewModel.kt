@@ -1,13 +1,14 @@
 package ru.avacodo.fktesttaskcompose.ui.screens.schedule
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.avacodo.fktesttaskcompose.domain.model.FitData
 import ru.avacodo.fktesttaskcompose.domain.usecase.GetFitDataUsecase
@@ -18,15 +19,16 @@ import kotlin.random.Random
 class FitScheduleViewModel @Inject constructor(
     private val usecase: GetFitDataUsecase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<FitScheduleScreenState<FitData>>()
-    val uiState: LiveData<FitScheduleScreenState<FitData>> = _uiState
+    private val _uiState =
+        MutableStateFlow<FitScheduleScreenState<FitData>>(FitScheduleScreenState.Initial())
+    val uiState = _uiState.asStateFlow()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        _uiState.postValue(
+        _uiState.update {
             FitScheduleScreenState.Error(
                 errorMessage = throwable.message.toString()
             )
-        )
+        }
     }
 
     init {
@@ -35,24 +37,24 @@ class FitScheduleViewModel @Inject constructor(
 
     fun execute(isRefreshing: Boolean = false) {
         if (!isRefreshing) {
-            _uiState.postValue(FitScheduleScreenState.Loading())
+            _uiState.update { FitScheduleScreenState.Loading() }
         } else {
-            _uiState.postValue(
+            _uiState.update {
                 FitScheduleScreenState.Refreshing<FitData>()
-                    .copy(data = _uiState.value?.data ?: listOf())
-            )
+                    .copy(data = _uiState.value.data)
+            }
         }
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Random.nextBoolean()) {
-                delay(2000)
+                delay(1000)
                 error("Test error")
             } else {
-                _uiState.postValue(
+                _uiState.update {
                     FitScheduleScreenState.Success(
                         data = usecase.getFitData(false)
                     )
-                )
+                }
             }
         }
     }

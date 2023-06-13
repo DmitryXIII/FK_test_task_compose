@@ -58,6 +58,7 @@ dependencies {
     implementation(platform(Dependencies.Android.kotlinBom))
     implementation(Dependencies.Android.lifecycleRuntimeKtx)
     implementation(Dependencies.Android.swipeRefresh)
+    implementation(Dependencies.Android.systemUIController)
 
     implementation(Dependencies.Compose.activityCompose)
     implementation(platform(Dependencies.Compose.composeBom))
@@ -65,7 +66,7 @@ dependencies {
     implementation(Dependencies.Compose.composeUiGraphics)
     implementation(Dependencies.Compose.composeUiToolingPreview)
     implementation(Dependencies.Compose.composeMaterial)
-    implementation(Dependencies.Compose.composeLiveData)
+    implementation(Dependencies.Compose.composeLifeCycle)
     implementation(Dependencies.Compose.composeNavigation)
     implementation(Dependencies.Compose.composeNavigationAnimation)
 
