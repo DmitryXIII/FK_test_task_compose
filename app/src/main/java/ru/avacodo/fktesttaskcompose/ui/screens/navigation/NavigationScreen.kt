@@ -39,7 +39,7 @@ fun NavigationScreen() {
                 0 -> {
                     title = "Расписание"
                     FitScheduleScreen(
-                        padding = paddingValues,
+                        paddingValues = paddingValues,
                         snackbarHostState = snackbarHostState
                     )
                 }
@@ -64,7 +64,7 @@ fun FKTopBar(title: String = "Title") {
                 Text(
                     text = title,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp
+                    fontSize = 16.sp
                 )
             },
         )
