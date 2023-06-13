@@ -58,6 +58,7 @@ dependencies {
     implementation(platform(Dependencies.Android.kotlinBom))
     implementation(Dependencies.Android.lifecycleRuntimeKtx)
     implementation(Dependencies.Android.swipeRefresh)
+    implementation(Dependencies.Android.systemUIController)
 
     implementation(Dependencies.Compose.activityCompose)
     implementation(platform(Dependencies.Compose.composeBom))

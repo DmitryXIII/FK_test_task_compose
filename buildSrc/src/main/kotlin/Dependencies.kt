@@ -4,12 +4,14 @@ object Dependencies {
         private const val lifecycleRuntimeKtxVersion = "2.6.1"
         private const val kotlinBomVersion = "1.8.0-RC2"
         private const val swipeRefreshVersion = "0.31.3-beta"
+        private const val systemUIControllerVersion = "0.30.1"
 
         const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
         const val lifecycleRuntimeKtx =
             "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion"
         const val kotlinBom = "org.jetbrains.kotlin:kotlin-bom:$kotlinBomVersion"
         const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:$swipeRefreshVersion"
+        const val systemUIController = "com.google.accompanist:accompanist-systemuicontroller:$systemUIControllerVersion"
     }
 
     object Compose {
